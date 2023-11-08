@@ -28,7 +28,7 @@ export const addBook = async (req, res) => {
   const client = await connectToDb();
   try {
     const db = client.db(process.env.DB_NAME);
-    const collection = db.collection("book_details");
+    const collection = db.collection(process.env.BOOK_COLLECTION);
     await collection.insertOne(req.body);
     const books_details = await collection.find({}).toArray();
     await client.close();
@@ -46,7 +46,7 @@ export const getBookDetails = async (req, res) => {
   const client = await connectToDb();
   try {
     const db = client.db(process.env.DB_NAME);
-    const collection = db.collection("book_details");
+    const collection = db.collection(process.env.BOOK_COLLECTION);
     const books_details = await collection.find({}).toArray();
     await client.close();
     return res.status(200).json({ result: books_details });
@@ -64,7 +64,7 @@ export const getBookDetailsById = async (req, res) => {
   try {
     if (req.query.id && req.query.id.length > 0) {
       const db = client.db(process.env.DB_NAME);
-      const collection = db.collection("book_details");
+      const collection = db.collection(process.env.BOOK_COLLECTION);
       const books_details = await collection
         .find({ _id: new ObjectId(req.query.id) })
         .toArray();
@@ -88,7 +88,7 @@ export const updateBookDetailsById = async (req, res) => {
   try {
     if (checkValidInput(req.body) && req.query.id && req.query.id.length > 0) {
       const db = client.db(process.env.DB_NAME);
-      const collection = db.collection("book_details");
+      const collection = db.collection(process.env.BOOK_COLLECTION);
       await collection.updateOne(
         { _id: new ObjectId(req.query.id) },
         { $set: req.body }
@@ -114,7 +114,7 @@ export const deleteBookDetailsById = async (req, res) => {
   try {
     if (req.query.id && req.query.id.length > 0) {
       const db = client.db(process.env.DB_NAME);
-      const collection = db.collection("book_details");
+      const collection = db.collection(process.env.BOOK_COLLECTION);
       await collection.updateOne(
         { _id: new ObjectId(req.query.id) },
         { $set: req.body }
