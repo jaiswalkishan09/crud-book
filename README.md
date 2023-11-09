@@ -7,7 +7,7 @@ i)cd crud-book
 iii)Create a .env file and add the following values. Please don't forget to update the MONGODB variable with the appropriate URL of your own cluster, also update the DB_NAME, and BOOK_COLLECTION.
 
 ```
-PORT:3000
+PORT: 3000
 MANGO_DB: "mongodb+srv://<username>:<password>?@<clustername>.mghjrnd.mongodb.net/?retryWrites=true&w=majority"
 DB_NAME: "book_demo"
 BOOK_COLLECTION: "book_details"
